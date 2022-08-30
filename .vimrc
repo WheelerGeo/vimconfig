@@ -7,34 +7,36 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'scrooloose/syntastic'
+Plug 'morhetz/gruvbox'
 call plug#end()
 
 set cursorline
 set cursorcolumn
+autocmd BufWritePre * :%s/\s\+$//e
 
 "nerdtree
 map <C-n> :NERDTreeToggle<CR>
-let NERDTreeShowHidden=1
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") &&b:NERDTree.isTabTree()) | q | endif
 
 "auto-pairs
 au Filetype FILETYPE let b:AutoPairs = {"(": ")"}
 au FileType php      let b:AutoPairs = AutoPairsDefine({'<?' : '?>', '<?php': '?>'})
 
 "vim-airline
-set laststatus=2								"always show status bar
-let g:airline_powerline_fonts = 1				"support powerline fontfamily
-let g:airline#extensions#tabline#enabled = 1 	"show window tab and buffer
-let g:airline_theme='molokai'
-
+set laststatus=2  					"always show status bar
+let g:airline_powerline_fonts = 1  			"support powerline fontfamily
+let g:airline#extensions#tabline#enabled = 1 		"show window tab and buffer
+let g:airline_theme='bubblegum'
 if !exists('g:airline_symbols')
 	let g:airline_symbols = {}
 endif
-let g:airline_left_sep = '▶'
-let g:airline_left_alt_sep = '❯'
-let g:airline_right_sep = '◀'
-let g:airline_right_alt_sep = '❮'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
 
 "vim-gutentags
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
@@ -82,3 +84,7 @@ noremap <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand
 noremap <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
 noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
 noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
+
+"gruvbox
+autocmd vimenter * ++nested colorscheme gruvbox
+set bg=dark
