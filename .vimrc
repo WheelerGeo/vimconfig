@@ -9,20 +9,21 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'scrooloose/syntastic'
 call plug#end()
 
-set cursorline   
-set cursorcolumn 
+set cursorline
+set cursorcolumn
 
 "nerdtree
 map <C-n> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
 
-"auto-pairs 
+"auto-pairs
 au Filetype FILETYPE let b:AutoPairs = {"(": ")"}
 au FileType php      let b:AutoPairs = AutoPairsDefine({'<?' : '?>', '<?php': '?>'})
 
 "vim-airline
-set laststatus=2  					"always show status bar
-let g:airline_powerline_fonts = 1  			"support powerline fontfamily
-let g:airline#extensions#tabline#enabled = 1 		"show window tab and buffer
+set laststatus=2								"always show status bar
+let g:airline_powerline_fonts = 1				"support powerline fontfamily
+let g:airline#extensions#tabline#enabled = 1 	"show window tab and buffer
 let g:airline_theme='molokai'
 
 if !exists('g:airline_symbols')
@@ -45,14 +46,14 @@ if !isdirectory(s:vim_tags)
 endif
 let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+x']
-let g:gutentags_ctags_extra_args += ['--c-kinds=+x'] 
+let g:gutentags_ctags_extra_args += ['--c-kinds=+x']
 
 "syntastic syntax checking to check on open as well as save
 let g:syntastic_check_on_open=1
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
-let g:syntastic_always_populate_loc_list = 1 
-let g:syntastic_auto_loc_list = 1 
-let g:syntastic_check_on_wq = 0 
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_wq = 0
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
