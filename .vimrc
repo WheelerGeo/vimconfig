@@ -8,6 +8,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'scrooloose/syntastic'
 Plug 'morhetz/gruvbox'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 set cursorline
