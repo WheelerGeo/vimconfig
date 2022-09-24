@@ -9,6 +9,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'scrooloose/syntastic'
 Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-fugitive'
+Plug 'faith/vim-go'
 call plug#end()
 
 set cursorline
@@ -89,3 +90,20 @@ noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
 "gruvbox
 autocmd vimenter * ++nested colorscheme gruvbox
 set bg=dark
+
+"Coc
+set encoding=utf-8
+set hidden
+set shortmess+=c
+set updatetime=100
+inoremap <silent><expr> <TAB>
+	\ coc#pum#visible() ? coc#pum#next(1) :
+	\ CheckBackspace() ? "\<Tab>" :
+	\ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+	\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+function! CheckBackspace() abort
+ let col = col('.') - 1
+ return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
